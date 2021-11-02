@@ -28,6 +28,38 @@ tlac2.addEventListener("click", () => {
     displayDole.textContent += tlac2.value;
 });
 
+tlac3.addEventListener("click", () => {
+    displayDole.textContent += tlac3.value;
+});
+
+tlac4.addEventListener("click", () => {
+    displayDole.textContent += tlac4.value;
+});
+
+tlac5.addEventListener("click", () => {
+    displayDole.textContent += tlac5.value;
+});
+
+tlac6.addEventListener("click", () => {
+    displayDole.textContent += tlac6.value;
+});
+
+tlac7.addEventListener("click", () => {
+    displayDole.textContent += tlac7.value;
+});
+
+tlac8.addEventListener("click", () => {
+    displayDole.textContent += tlac8.value;
+});
+
+tlac9.addEventListener("click", () => {
+    displayDole.textContent += tlac9.value;
+});
+
+tlac0.addEventListener("click", () => {
+    displayDole.textContent += tlac0.value;
+});
+
 // eventy pro tlacitka matematických funkcí
 tlacRovna.addEventListener("click", () => {
     zpracujDruheCislo (displayDole.textContent);
