@@ -30,8 +30,7 @@ tlac2.addEventListener("click", () => {
 
 // eventy pro tlacitka matematických funkcí
 tlacRovna.addEventListener("click", () => {
-    ulozDruheCislo (displayDole.textContent);
-    propisDruheNahoru (displayDole.textContent);
+    zpracujDruheCislo (displayDole.textContent);
     switch (operator) {
         case "+":
             displayDole.textContent = prvniHodnota + druhaHodnota;    
@@ -49,40 +48,30 @@ tlacRovna.addEventListener("click", () => {
 });
 
 tlacPlus.addEventListener("click", () => {
-    ulozPrvniCislo (displayDole.textContent);
-    propisPrvniNahoru(displayDole.textContent, "+");
+    zpracujPrvniCislo(displayDole.textContent, "+");
 });
 
 tlacMinus.addEventListener("click", () => {
-    ulozPrvniCislo (displayDole.textContent);
-    propisPrvniNahoru(displayDole.textContent, "-");
+    zpracujPrvniCislo(displayDole.textContent, "-");
 });
 
 tlacKrat.addEventListener("click", () => {
-    ulozPrvniCislo (displayDole.textContent);
-    propisPrvniNahoru(displayDole.textContent, "*");
+    zpracujPrvniCislo(displayDole.textContent, "*");
 });
 
 tlacDeleno.addEventListener("click", () => {
-    ulozPrvniCislo (displayDole.textContent);
-    propisPrvniNahoru(displayDole.textContent, "/");
+    zpracujPrvniCislo(displayDole.textContent, "/");
 });
 
 // funkce pro zpracování
-function propisPrvniNahoru (vyraz1, znamenko) {
+function zpracujPrvniCislo (vyraz1, znamenko) {
     displayNahore.textContent = vyraz1 + " " + znamenko + " ";
     displayDole.textContent = "";
     operator = znamenko;
+    prvniHodnota = parseInt(vyraz1);
 }
 
-function propisDruheNahoru(vyraz2) {
+function zpracujDruheCislo(vyraz2) {
     displayNahore.textContent += vyraz2;
-}
-
-function ulozPrvniCislo (num1) {
-    prvniHodnota = parseInt(num1);
-}
-
-function ulozDruheCislo (num1) {
-    druhaHodnota = parseInt(num1);
+    druhaHodnota = parseInt(vyraz2);
 }
