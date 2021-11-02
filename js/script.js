@@ -15,7 +15,11 @@ const tlacPlus = document.getElementById("tlacPlus");
 const displayDole = document.querySelector(".displayDole");
 const displayNahore = document.querySelector(".displayNahore");
 
+let prvniHodnota; // zde ukládám čísla pro výpočet
+let druhaHodnota;
+let operator; // zde ukládám operator matematické funkce
 
+// eventy pro tlačítka čísel
 tlac1.addEventListener("click", () => {
     displayDole.textContent += tlac1.value;
 });
@@ -24,8 +28,61 @@ tlac2.addEventListener("click", () => {
     displayDole.textContent += tlac2.value;
 });
 
-tlacPlus.addEventListener("click", () => {ulozPrvniCislo(displayDole.textContent, "+")});
+// eventy pro tlacitka matematických funkcí
+tlacRovna.addEventListener("click", () => {
+    ulozDruheCislo (displayDole.textContent);
+    propisDruheNahoru (displayDole.textContent);
+    switch (operator) {
+        case "+":
+            displayDole.textContent = prvniHodnota + druhaHodnota;    
+            break;
+        case "-":
+            displayDole.textContent = prvniHodnota - druhaHodnota;
+            break;
+        case "*":
+            displayDole.textContent = prvniHodnota * druhaHodnota;
+            break;
+        case "/":
+            displayDole.textContent = prvniHodnota / druhaHodnota;
+            break;          
+    }
+});
 
-function ulozPrvniCislo (cislo1, operator) {
-    displayNahore.textContent = cislo1 + " " + operator;
+tlacPlus.addEventListener("click", () => {
+    ulozPrvniCislo (displayDole.textContent);
+    propisPrvniNahoru(displayDole.textContent, "+");
+});
+
+tlacMinus.addEventListener("click", () => {
+    ulozPrvniCislo (displayDole.textContent);
+    propisPrvniNahoru(displayDole.textContent, "-");
+});
+
+tlacKrat.addEventListener("click", () => {
+    ulozPrvniCislo (displayDole.textContent);
+    propisPrvniNahoru(displayDole.textContent, "*");
+});
+
+tlacDeleno.addEventListener("click", () => {
+    ulozPrvniCislo (displayDole.textContent);
+    propisPrvniNahoru(displayDole.textContent, "/");
+});
+
+// funkce pro zpracování
+function propisPrvniNahoru (vyraz1, znamenko) {
+    displayNahore.textContent = vyraz1 + " " + znamenko + " ";
+    displayDole.textContent = "";
+    operator = znamenko;
+}
+
+function propisDruheNahoru(vyraz2) {
+    displayNahore.textContent += vyraz2;
+}
+
+function ulozPrvniCislo (num1) {
+    prvniHodnota = parseInt(num1);
+}
+
+function ulozDruheCislo (num1) {
+    druhaHodnota = parseInt(num1);
 }
