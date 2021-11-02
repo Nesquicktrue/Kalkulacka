@@ -16,16 +16,19 @@
 .display {
     border: 5px solid black;
     margin: 5px;
+
 }
 
 .displayNahore {
     text-align: right;
     font-size: small;
+    height: 16px;
 }
 
 .displayDole {
     font-weight: 700;
     font-size: xx-large;
+    height: 40px;
 }
 
 .funkce {

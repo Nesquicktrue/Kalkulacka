@@ -97,10 +97,12 @@ tlacDeleno.addEventListener("click", () => {
 
 // funkce pro zpracování
 function zpracujPrvniCislo (vyraz1, znamenko) {
+    
     displayNahore.textContent = vyraz1 + " " + znamenko + " ";
     displayDole.textContent = "";
-    operator = znamenko;
+
     prvniHodnota = parseInt(vyraz1);
+    operator = znamenko;
 }
 
 function zpracujDruheCislo(vyraz2) {
