@@ -18,6 +18,7 @@ const displayNahore = document.querySelector(".displayNahore");
 let prvniHodnota; // zde ukládám čísla pro výpočet
 let druhaHodnota;
 let operator; // zde ukládám operator matematické funkce
+let pocetHodnot = 0; // zde ukládám počet zadaných hodnot, abych vyhodnotil opakované stisknuté tlačítko funkce
 
 // eventy pro tlačítka čísel
 tlac1.addEventListener("click", () => {
@@ -62,7 +63,70 @@ tlac0.addEventListener("click", () => {
 
 // eventy pro tlacitka matematických funkcí
 tlacRovna.addEventListener("click", () => {
-    zpracujDruheCislo (displayDole.textContent);
+    pocitej();
+
+});
+
+tlacPlus.addEventListener("click", () => {
+    overZadani("+");    
+});
+
+tlacMinus.addEventListener("click", () => {
+    overZadani("-"); 
+});
+
+tlacKrat.addEventListener("click", () => {
+    overZadani("*"); 
+});
+
+tlacDeleno.addEventListener("click", () => {
+    overZadani("/"); 
+});
+
+
+// funkce pro zpracování
+function overZadani (znamenko) {
+    
+    operator = znamenko;
+    let stavOperace;
+    let delka = displayNahore.textContent.length - 2;
+    if (displayNahore.textContent == "") {
+        zpracujPrvniCislo(displayDole.textContent);
+        console.log("Zpracuji prvni cislo");
+
+    } else if (displayNahore.textContent[delka] === znamenko) {
+             stavOperace = "stejneznamenko";
+             console.log("Zadáváte stejné znaménko početHodnot: " + pocetHodnot);
+             return;
+             
+    } else if ( displayNahore.textContent[delka] === "+" ||
+                displayNahore.textContent[delka] === "-" ||
+                displayNahore.textContent[delka] === "*" ||
+                displayNahore.textContent[delka] === "/"      
+            ) {
+            stavOperace = "jineznamenko"
+            console.log ("Dávám znaménko: " + operator);
+    } else {
+            stavOperace = "nahoreJeVyraz"
+            console.log("nahoře je výraz k počítání")
+    };      
+    
+        
+    switch (stavOperace) {
+        case "stejneznamenko": 
+            break;
+            
+        case "jineznamenko":
+            break;
+       
+        default:
+            break;
+    }
+}; 
+
+function pocitej () {
+    displayNahore.textContent += displayDole.textContent;
+    druhaHodnota = parseInt(displayDole.textContent);
     switch (operator) {
         case "+":
             displayDole.textContent = prvniHodnota + druhaHodnota;    
@@ -77,35 +141,20 @@ tlacRovna.addEventListener("click", () => {
             displayDole.textContent = prvniHodnota / druhaHodnota;
             break;          
     }
-});
+};
 
-tlacPlus.addEventListener("click", () => {
-    zpracujPrvniCislo(displayDole.textContent, "+");
-});
-
-tlacMinus.addEventListener("click", () => {
-    zpracujPrvniCislo(displayDole.textContent, "-");
-});
-
-tlacKrat.addEventListener("click", () => {
-    zpracujPrvniCislo(displayDole.textContent, "*");
-});
-
-tlacDeleno.addEventListener("click", () => {
-    zpracujPrvniCislo(displayDole.textContent, "/");
-});
-
-// funkce pro zpracování
-function zpracujPrvniCislo (vyraz1, znamenko) {
-    
-    displayNahore.textContent = vyraz1 + " " + znamenko + " ";
+function zpracujPrvniCislo (vyraz1) {    
+    displayNahore.textContent = vyraz1 + " " + operator + " ";
     displayDole.textContent = "";
-
     prvniHodnota = parseInt(vyraz1);
-    operator = znamenko;
+    ++pocetHodnot; 
 }
 
-function zpracujDruheCislo(vyraz2) {
-    displayNahore.textContent += vyraz2;
-    druhaHodnota = parseInt(vyraz2);
+function zpracujDalsiCislo (vyraz3) {
+        
 }
+
+// function zpracujDruheCislo(vyraz2) {
+//     displayNahore.textContent += displayDole.textContent;
+//     druhaHodnota = parseInt(displayDole.textContent);
+//     }
