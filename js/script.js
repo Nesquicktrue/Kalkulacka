@@ -18,7 +18,7 @@ const displayNahore = document.querySelector(".displayNahore");
 let prvniHodnota; // zde ukládám čísla pro výpočet
 let druhaHodnota;
 let operator; // zde ukládám operator matematické funkce
-let pocetHodnot = 0; // zde ukládám počet zadaných hodnot, abych vyhodnotil opakované stisknuté tlačítko funkce
+let delka; // pozice pro znak znaménka ve stringu displayNahore.textcontent 
 
 // eventy pro tlačítka čísel
 tlac1.addEventListener("click", () => {
@@ -63,70 +63,83 @@ tlac0.addEventListener("click", () => {
 
 // eventy pro tlacitka matematických funkcí
 tlacRovna.addEventListener("click", () => {
-    pocitej();
-
+    if (displayDole.textContent != "") {pocitej()};
 });
 
 tlacPlus.addEventListener("click", () => {
-    overZadani("+");    
+    if (displayDole.textContent != "") {overZadani("+")};    
 });
 
 tlacMinus.addEventListener("click", () => {
+    if (displayDole.textContent != "") {overZadani("-")};   
     overZadani("-"); 
 });
 
 tlacKrat.addEventListener("click", () => {
-    overZadani("*"); 
+    if (displayDole.textContent != "") {overZadani("*")};   
 });
 
 tlacDeleno.addEventListener("click", () => {
-    overZadani("/"); 
+    if (displayDole.textContent != "") {overZadani("/")};   
 });
-
 
 // funkce pro zpracování
 function overZadani (znamenko) {
-    
-    operator = znamenko;
     let stavOperace;
-    let delka = displayNahore.textContent.length - 2;
+    delka = displayNahore.textContent.length - 2; 
+    operator = znamenko;
+    
     if (displayNahore.textContent == "") {
         zpracujPrvniCislo(displayDole.textContent);
-        console.log("Zpracuji prvni cislo");
 
     } else if (displayNahore.textContent[delka] === znamenko) {
-             stavOperace = "stejneznamenko";
-             console.log("Zadáváte stejné znaménko početHodnot: " + pocetHodnot);
-             return;
-             
+             stavOperace = "stejneZnamenko";
+
     } else if ( displayNahore.textContent[delka] === "+" ||
                 displayNahore.textContent[delka] === "-" ||
                 displayNahore.textContent[delka] === "*" ||
                 displayNahore.textContent[delka] === "/"      
             ) {
-            stavOperace = "jineznamenko"
-            console.log ("Dávám znaménko: " + operator);
+            stavOperace = "jineZnamenko"
+
     } else {
             stavOperace = "nahoreJeVyraz"
-            console.log("nahoře je výraz k počítání")
     };      
     
-        
     switch (stavOperace) {
-        case "stejneznamenko": 
+        case "stejneZnamenko": 
+            if (displayDole.textContent != "") {
+                operator = displayNahore.textContent[delka];
+                pocitej();
+                zpracujDalsiCislo();
+            }
             break;
             
-        case "jineznamenko":
+        case "jineZnamenko":
+            if (displayDole.textContent === "") {
+                // !!BUG - řádek níže přepíše i záporná čísla !!! změň úpravu jen posledního znaku
+                displayNahore.textContent = displayNahore.textContent.replace(/[^0-9\ ]+/g, operator); 
+                console.log ("Měním znaménko na: " + operator);
+            } else {
+                operator = displayNahore.textContent[delka];
+                pocitej();
+                zpracujDalsiCislo();
+                console.log(operator);
+            }
             break;
        
-        default:
+        case "nahoreJeVyraz":
+            zpracujPrvniCislo(displayDole.textContent);
             break;
     }
 }; 
 
 function pocitej () {
     displayNahore.textContent += displayDole.textContent;
-    druhaHodnota = parseInt(displayDole.textContent);
+    druhaHodnota = Math.floor(displayDole.textContent);
+    console.log(prvniHodnota + " : " + typeof(prvniHodnota));
+    console.log(operator + " : znaménko");
+    console.log(druhaHodnota + " : " + typeof(druhaHodnota));
     switch (operator) {
         case "+":
             displayDole.textContent = prvniHodnota + druhaHodnota;    
@@ -141,20 +154,21 @@ function pocitej () {
             displayDole.textContent = prvniHodnota / druhaHodnota;
             break;          
     }
+    prvniHodnota = Math.floor(displayDole.textContent);
 };
 
 function zpracujPrvniCislo (vyraz1) {    
     displayNahore.textContent = vyraz1 + " " + operator + " ";
     displayDole.textContent = "";
-    prvniHodnota = parseInt(vyraz1);
-    ++pocetHodnot; 
+    prvniHodnota = Math.floor(vyraz1);
 }
 
-function zpracujDalsiCislo (vyraz3) {
-        
+function zpracujDalsiCislo () {
+    displayNahore.textContent = displayDole.textContent + " " + operator + " ";
+    displayDole.textContent = "";      
 }
 
-// function zpracujDruheCislo(vyraz2) {
-//     displayNahore.textContent += displayDole.textContent;
-//     druhaHodnota = parseInt(displayDole.textContent);
-//     }
+function zpracujDruheCislo() {
+     displayNahore.textContent += displayDole.textContent;
+     druhaHodnota = parseInt(displayDole.textContent);
+}
