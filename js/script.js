@@ -16,6 +16,7 @@ const tlacSmaz = document.getElementById("tlacSmaz");
 
 const displayDole = document.querySelector(".displayDole");
 const displayNahore = document.querySelector(".displayNahore");
+const boomGif = document.querySelector(".cover");
 
 let prvniHodnota;   // zde ukládám čísla pro výpočet
 let druhaHodnota;
@@ -151,6 +152,13 @@ function pocitej () {
         case "/":
             displayDole.textContent = prvniHodnota / druhaHodnota;
             break;          
+    }
+    if (displayDole.textContent = "Infinity") {
+        setTimeout(function(){
+            boomGif.classList.toggle("neviditelny");
+        }, 900); 
+        boomGif.classList.toggle("neviditelny");
+        
     }
     prvniHodnota = Math.floor(displayDole.textContent);
 };

@@ -3,6 +3,21 @@
     padding: 0px;
 }
 
+.neviditelny {
+    display: none;
+}
+
+.telo {
+position: relative;
+}
+
+.cover {
+    position: absolute;
+    /* position in top left of #tobecovered */
+    top: 0; /* top of #tobecovered */
+    left: 100px; /* left of #tobecovered */
+}
+
 .tlacitka {
     display: flex;
     justify-content: space-evenly;
