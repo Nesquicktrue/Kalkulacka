@@ -63,47 +63,61 @@ tlac0.addEventListener("click", () => {
 
 // eventy pro tlacitka matematických funkcí
 tlacRovna.addEventListener("click", () => {
-    if (displayDole.textContent != "") {pocitej()};
+    delka = displayNahore.textContent.length - 2;
+     if (  
+        displayDole.textContent != "" && (
+        displayNahore.textContent[delka] === "+"
+        || displayNahore.textContent[delka] === "-" 
+        || displayNahore.textContent[delka] === "*" 
+        || displayNahore.textContent[delka] === "/"))  {
+            pocitej();
+        } else {
+            
+        }
 });
 
 tlacPlus.addEventListener("click", () => {
-    if (displayDole.textContent != "") {overZadani("+")};    
+    overZadani("+");    
 });
 
 tlacMinus.addEventListener("click", () => {
-    if (displayDole.textContent != "") {overZadani("-")};   
-    overZadani("-"); 
+    overZadani("-");   
 });
 
 tlacKrat.addEventListener("click", () => {
-    if (displayDole.textContent != "") {overZadani("*")};   
+    overZadani("*");   
 });
 
 tlacDeleno.addEventListener("click", () => {
-    if (displayDole.textContent != "") {overZadani("/")};   
+    overZadani("/");   
 });
 
 // funkce pro zpracování
 function overZadani (znamenko) {
     let stavOperace;
-    delka = displayNahore.textContent.length - 2; 
+    delka = displayNahore.textContent.length - 2;
     operator = znamenko;
     
     if (displayNahore.textContent == "") {
+        console.log("zpracovávám první číslo")
         zpracujPrvniCislo(displayDole.textContent);
 
     } else if (displayNahore.textContent[delka] === znamenko) {
              stavOperace = "stejneZnamenko";
-
+             console.log("stejné znaménko");
+             
     } else if ( displayNahore.textContent[delka] === "+" ||
                 displayNahore.textContent[delka] === "-" ||
                 displayNahore.textContent[delka] === "*" ||
                 displayNahore.textContent[delka] === "/"      
             ) {
-            stavOperace = "jineZnamenko"
+            stavOperace = "jineZnamenko";
+            console.log("jiné znaménko");
 
     } else {
-            stavOperace = "nahoreJeVyraz"
+            stavOperace = "nahoreJeVyraz";
+            
+            
     };      
     
     switch (stavOperace) {
