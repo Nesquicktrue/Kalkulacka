@@ -45,6 +45,8 @@ tlac7.addEventListener("click", () => {displayDole.textContent += tlac7.value});
 tlac8.addEventListener("click", () => {displayDole.textContent += tlac8.value});
 tlac9.addEventListener("click", () => {displayDole.textContent += tlac9.value});
 tlac0.addEventListener("click", () => {displayDole.textContent += tlac0.value});
+tlacTecka.addEventListener("click", () => {
+    displayDole.textContent += "."});
 
 // u tlačítka "rovná se" hlídám vícero zmáčknutí 
 tlacRovna.addEventListener("click", () => {
@@ -153,14 +155,14 @@ function pocitej () {
             displayDole.textContent = prvniHodnota / druhaHodnota;
             break;          
     }
-    if (displayDole.textContent = "Infinity") {
+    if (displayDole.textContent === "Infinity") {
         setTimeout(function(){
             boomGif.classList.toggle("neviditelny");
         }, 900); 
         boomGif.classList.toggle("neviditelny");
         
     }
-    prvniHodnota = Math.floor(displayDole.textContent);
+    prvniHodnota = parseFloat(displayDole.textContent);
 };
 
 function zpracujPrvniCislo (vyraz1) {    
