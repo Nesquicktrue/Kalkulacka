@@ -18,6 +18,7 @@ const displayNahore = document.querySelector(".displayNahore");
 let prvniHodnota; // zde ukládám čísla pro výpočet
 let druhaHodnota;
 let operator; // zde ukládám operator matematické funkce
+let novyOperator; // zde ukládám další operátor pro počítání v řadě bez stisknutí "Rovná se"
 let delka; // pozice pro znak znaménka ve stringu displayNahore.textcontent 
 
 // eventy pro tlačítka čísel
@@ -61,7 +62,7 @@ tlac0.addEventListener("click", () => {
     displayDole.textContent += tlac0.value;
 });
 
-// eventy pro tlacitka matematických funkcí
+// u tlačítka "rovná se" hlídám vícero zmáčknutí 
 tlacRovna.addEventListener("click", () => {
     delka = displayNahore.textContent.length - 2;
      if (  
@@ -80,8 +81,13 @@ tlacPlus.addEventListener("click", () => {
     overZadani("+");    
 });
 
+// u tlačítka mínus kontroluji zadání prvního čísla záporného
 tlacMinus.addEventListener("click", () => {
-    overZadani("-");   
+    if (displayNahore.textContent == "" && displayDole.textContent == "") {
+        displayDole.textContent = "-";
+    } else {
+    overZadani("-");
+}   
 });
 
 tlacKrat.addEventListener("click", () => {
@@ -116,8 +122,6 @@ function overZadani (znamenko) {
 
     } else {
             stavOperace = "nahoreJeVyraz";
-            
-            
     };      
     
     switch (stavOperace) {
@@ -135,6 +139,7 @@ function overZadani (znamenko) {
                 displayNahore.textContent = displayNahore.textContent.replace(/[^0-9\ ]+/g, operator); 
                 console.log ("Měním znaménko na: " + operator);
             } else {
+                novyOperator = operator; //ukládám hodnotu než se přepíše, abych ji použil na horní zápis
                 operator = displayNahore.textContent[delka];
                 pocitej();
                 zpracujDalsiCislo();
@@ -150,7 +155,7 @@ function overZadani (znamenko) {
 
 function pocitej () {
     displayNahore.textContent += displayDole.textContent;
-    druhaHodnota = Math.floor(displayDole.textContent);
+    druhaHodnota = parseFloat(displayDole.textContent);
     console.log(prvniHodnota + " : " + typeof(prvniHodnota));
     console.log(operator + " : znaménko");
     console.log(druhaHodnota + " : " + typeof(druhaHodnota));
@@ -174,15 +179,11 @@ function pocitej () {
 function zpracujPrvniCislo (vyraz1) {    
     displayNahore.textContent = vyraz1 + " " + operator + " ";
     displayDole.textContent = "";
-    prvniHodnota = Math.floor(vyraz1);
+    prvniHodnota = parseFloat(vyraz1);
 }
 
 function zpracujDalsiCislo () {
+    operator = novyOperator;
     displayNahore.textContent = displayDole.textContent + " " + operator + " ";
     displayDole.textContent = "";      
-}
-
-function zpracujDruheCislo() {
-     displayNahore.textContent += displayDole.textContent;
-     druhaHodnota = parseInt(displayDole.textContent);
 }
