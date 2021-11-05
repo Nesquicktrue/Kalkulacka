@@ -12,6 +12,7 @@ const tlacTecka = document.getElementById("tecka");
 const tlacRovna = document.getElementById("tlacRovna");
 const tlacPlus = document.getElementById("tlacPlus");
 const tlacClear = document.getElementById("tlacClear");
+const tlacSmaz = document.getElementById("tlacSmaz");
 
 const displayDole = document.querySelector(".displayDole");
 const displayNahore = document.querySelector(".displayNahore");
@@ -24,49 +25,25 @@ let novyOperator;   // zde ukládám další operátor pro počítání
 let delka;          // pozice pro znak znaménka ve stringu displayNahore.textcontent 
 
 // eventy pro tlačítka čísel
-tlacClear.addEventListener("click", () => {
-    location.reload();
+tlacClear.addEventListener("click", () => {location.reload()});
+
+tlacSmaz.addEventListener("click", () => {
+    if (displayDole.textContent != "") {
+    displayDole.textContent = 
+        displayDole.textContent.slice(0, -1);
+    }
 });
 
-tlac1.addEventListener("click", () => {
-    displayDole.textContent += tlac1.value;
-});
-
-tlac2.addEventListener("click", () => {
-    displayDole.textContent += tlac2.value;
-});
-
-tlac3.addEventListener("click", () => {
-    displayDole.textContent += tlac3.value;
-});
-
-tlac4.addEventListener("click", () => {
-    displayDole.textContent += tlac4.value;
-});
-
-tlac5.addEventListener("click", () => {
-    displayDole.textContent += tlac5.value;
-});
-
-tlac6.addEventListener("click", () => {
-    displayDole.textContent += tlac6.value;
-});
-
-tlac7.addEventListener("click", () => {
-    displayDole.textContent += tlac7.value;
-});
-
-tlac8.addEventListener("click", () => {
-    displayDole.textContent += tlac8.value;
-});
-
-tlac9.addEventListener("click", () => {
-    displayDole.textContent += tlac9.value;
-});
-
-tlac0.addEventListener("click", () => {
-    displayDole.textContent += tlac0.value;
-});
+tlac1.addEventListener("click", () => {displayDole.textContent += tlac1.value});
+tlac2.addEventListener("click", () => {displayDole.textContent += tlac2.value});
+tlac3.addEventListener("click", () => {displayDole.textContent += tlac3.value});
+tlac4.addEventListener("click", () => {displayDole.textContent += tlac4.value});
+tlac5.addEventListener("click", () => {displayDole.textContent += tlac5.value});
+tlac6.addEventListener("click", () => {displayDole.textContent += tlac6.value});
+tlac7.addEventListener("click", () => {displayDole.textContent += tlac7.value});
+tlac8.addEventListener("click", () => {displayDole.textContent += tlac8.value});
+tlac9.addEventListener("click", () => {displayDole.textContent += tlac9.value});
+tlac0.addEventListener("click", () => {displayDole.textContent += tlac0.value});
 
 // u tlačítka "rovná se" hlídám vícero zmáčknutí 
 tlacRovna.addEventListener("click", () => {
@@ -83,9 +60,9 @@ tlacRovna.addEventListener("click", () => {
         }
 });
 
-tlacPlus.addEventListener("click", () => {
-    overZadani("+");    
-});
+tlacPlus.addEventListener("click", () => {overZadani("+")});
+tlacKrat.addEventListener("click", () => {overZadani("*")});
+tlacDeleno.addEventListener("click", () => {overZadani("/")});
 
 // u tlačítka mínus kontroluji zadání prvního čísla záporného
 tlacMinus.addEventListener("click", () => {
@@ -93,15 +70,7 @@ tlacMinus.addEventListener("click", () => {
         displayDole.textContent = "-";
     } else {
     overZadani("-");
-}   
-});
-
-tlacKrat.addEventListener("click", () => {
-    overZadani("*");   
-});
-
-tlacDeleno.addEventListener("click", () => {
-    overZadani("/");   
+    }   
 });
 
 // funkce pro zpracování
