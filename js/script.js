@@ -26,15 +26,11 @@ let novyOperator;   // zde ukládám další operátor pro počítání
 let delka;          // pozice pro znak znaménka ve stringu displayNahore.textcontent 
 
 // eventy pro tlačítka čísel
+
+
+
+
 tlacClear.addEventListener("click", () => {location.reload()});
-
-tlacSmaz.addEventListener("click", () => {
-    if (displayDole.textContent != "") {
-    displayDole.textContent = 
-        displayDole.textContent.slice(0, -1);
-    }
-});
-
 tlac1.addEventListener("click", () => {displayDole.textContent += tlac1.value});
 tlac2.addEventListener("click", () => {displayDole.textContent += tlac2.value});
 tlac3.addEventListener("click", () => {displayDole.textContent += tlac3.value});
@@ -45,8 +41,28 @@ tlac7.addEventListener("click", () => {displayDole.textContent += tlac7.value});
 tlac8.addEventListener("click", () => {displayDole.textContent += tlac8.value});
 tlac9.addEventListener("click", () => {displayDole.textContent += tlac9.value});
 tlac0.addEventListener("click", () => {displayDole.textContent += tlac0.value});
+
+// tlačítko smazat poslední znak
+// hlídám jestli není dole prázdno a nenechám mazat z výsledku
+tlacSmaz.addEventListener("click", () => {
+    delka = displayNahore.textContent.length - 2;
+    if (displayDole.textContent != "" ||
+           displayNahore.textContent[delka] === "+"
+        || displayNahore.textContent[delka] === "-" 
+        || displayNahore.textContent[delka] === "*" 
+        || displayNahore.textContent[delka] === "/")    
+    {
+    displayDole.textContent = 
+        displayDole.textContent.slice(0, -1);
+    }
+});
+
+// tlačítko tečka - hlídám pouze jedno použití v jednom čísle
 tlacTecka.addEventListener("click", () => {
-    displayDole.textContent += "."});
+    if (displayDole.textContent.includes(".")) {
+    } else {
+        displayDole.textContent += "."}
+    });
 
 // u tlačítka "rovná se" hlídám vícero zmáčknutí 
 tlacRovna.addEventListener("click", () => {
@@ -58,9 +74,7 @@ tlacRovna.addEventListener("click", () => {
         || displayNahore.textContent[delka] === "*" 
         || displayNahore.textContent[delka] === "/"))  {
             pocitej();
-        } else {
-            
-        }
+        } 
 });
 
 tlacPlus.addEventListener("click", () => {overZadani("+")});
@@ -155,7 +169,7 @@ function pocitej () {
             displayDole.textContent = prvniHodnota / druhaHodnota;
             break;          
     }
-    if (displayDole.textContent === "Infinity") {
+    if (displayDole.textContent === "Infinity") {      // dělení nulou
         setTimeout(function(){
             boomGif.classList.toggle("neviditelny");
         }, 900); 
