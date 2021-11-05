@@ -11,17 +11,23 @@ const tlac0 = document.getElementById("tlac0");
 const tlacTecka = document.getElementById("tecka");
 const tlacRovna = document.getElementById("tlacRovna");
 const tlacPlus = document.getElementById("tlacPlus");
+const tlacClear = document.getElementById("tlacClear");
 
 const displayDole = document.querySelector(".displayDole");
 const displayNahore = document.querySelector(".displayNahore");
 
-let prvniHodnota; // zde ukládám čísla pro výpočet
+let prvniHodnota;   // zde ukládám čísla pro výpočet
 let druhaHodnota;
-let operator; // zde ukládám operator matematické funkce
-let novyOperator; // zde ukládám další operátor pro počítání v řadě bez stisknutí "Rovná se"
-let delka; // pozice pro znak znaménka ve stringu displayNahore.textcontent 
+let operator;       // zde ukládám operator matematické funkce
+let novyOperator;   // zde ukládám další operátor pro počítání
+                    // v řadě bez stisknutí "Rovná se"
+let delka;          // pozice pro znak znaménka ve stringu displayNahore.textcontent 
 
 // eventy pro tlačítka čísel
+tlacClear.addEventListener("click", () => {
+    location.reload();
+});
+
 tlac1.addEventListener("click", () => {
     displayDole.textContent += tlac1.value;
 });
@@ -103,6 +109,9 @@ function overZadani (znamenko) {
     let stavOperace;
     delka = displayNahore.textContent.length - 2;
     operator = znamenko;
+    novyOperator = operator;    //ukládám hodnotu než se přepíše,
+                                // abych ji použil na horní zápis
+                                // v případě jiného znaménka v řadě výpočtů
     
     if (displayNahore.textContent == "") {
         console.log("zpracovávám první číslo")
@@ -135,11 +144,12 @@ function overZadani (znamenko) {
             
         case "jineZnamenko":
             if (displayDole.textContent === "") {
-                // !!BUG - řádek níže přepíše i záporná čísla !!! změň úpravu jen posledního znaku
-                displayNahore.textContent = displayNahore.textContent.replace(/[^0-9\ ]+/g, operator); 
+                displayNahore.textContent = 
+                    displayNahore.textContent.substr(displayNahore.textContent[delka], 2) + 
+                    " " + operator + " ";
                 console.log ("Měním znaménko na: " + operator);
             } else {
-                novyOperator = operator; //ukládám hodnotu než se přepíše, abych ji použil na horní zápis
+
                 operator = displayNahore.textContent[delka];
                 pocitej();
                 zpracujDalsiCislo();
@@ -183,7 +193,7 @@ function zpracujPrvniCislo (vyraz1) {
 }
 
 function zpracujDalsiCislo () {
-    operator = novyOperator;
+    operator = novyOperator;  // beru si nově zmáčknuté znaménko pro horní zápis
     displayNahore.textContent = displayDole.textContent + " " + operator + " ";
     displayDole.textContent = "";      
 }
