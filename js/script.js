@@ -183,12 +183,15 @@ function pocitej () {
 };
 
 function deleniNulou() {
-    if (displayDole.textContent === "Infinity" || displayDole.textContent === "NaN") {
-        setTimeout(function(){
+    if (displayDole.textContent === "Infinity" 
+        || displayDole.textContent === "NaN"
+        || displayDole.textContent === "-Infinity"
+        ) {
+            setTimeout(function(){
+                boomGif.classList.toggle("neviditelny");
+            }, 900); 
             boomGif.classList.toggle("neviditelny");
-        }, 900); 
-        boomGif.classList.toggle("neviditelny");
-        displayDole.textContent = "Dělíte nulou!";
+        displayDole.textContent = "   ÷ 0   ";
     }
 };
 
