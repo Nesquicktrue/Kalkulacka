@@ -13,6 +13,7 @@ const tlacRovna = document.getElementById("tlacRovna");
 const tlacPlus = document.getElementById("tlacPlus");
 const tlacClear = document.getElementById("tlacClear");
 const tlacSmaz = document.getElementById("tlacSmaz");
+const skin = document.getElementById("skins");
 
 const displayDole = document.querySelector(".displayDole");
 const displayNahore = document.querySelector(".displayNahore");
@@ -179,3 +180,23 @@ function zpracujDalsiCislo () {
     displayNahore.textContent = displayDole.textContent + " " + operator + " ";
     displayDole.textContent = "";      
 }
+
+//změna skinu
+skin.addEventListener("change", () => {
+    switch (skin.value) {
+        case "helloKitty":
+            document.querySelector(".display").style.backgroundColor = "lightpink";
+            document.querySelector(".telo").style.backgroundImage="url('./img/hello-kitty.jpg')";
+            break;
+        case "SW":
+            document.querySelector(".display").style.backgroundColor = "lightcyan";
+            document.querySelector(".telo").style.backgroundImage="url(./img/sw.jpg)";   
+            break;
+        case "shrek":
+            document.querySelector(".display").style.backgroundColor = "greenyellow";
+            document.querySelector(".telo").style.backgroundImage="url(./img/shrek.jpg)";  
+            break;
+            
+    }    
+
+});

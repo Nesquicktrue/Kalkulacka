@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="uvod">Úvod</div>
+        <div class="uvod"></div>
         <div class="telo">
             <img src="img/boom.gif" alt="" class="cover neviditelny">
             <div class="display">
@@ -36,22 +36,28 @@
                     <button id="tlac9" value="9" class="tlacCislo">9</button>
                     <button id="tlac0" value="0" class="tlacCislo">0</button>
                     <button id="tecka" value="." class="tlacCislo">.</button>
-                    <button id="tlacClear" class="tlacCislo">CLR</button>
-                    <button id="tlacSmaz" class="tlacCislo"> < </button>
+                    
+                    <button id="tlacClear" style="width:125px" class="tlacCislo">CLR</button>
+                    <button id="tlacSmaz" class="tlacCislo"> ← </button>
                 </div>
 
                 <div class="funkce">
                     <button id="tlacPlus" class="tlacFunkce">+</button>
                     <button id="tlacMinus" class="tlacFunkce">-</button>
                     <button id="tlacKrat" class="tlacFunkce">*</button>
-                    <button id="tlacDeleno" class="tlacFunkce">/</button>
+                    <button id="tlacDeleno" class="tlacFunkce">÷</button>
                     <button id="tlacRovna" class="tlacFunkce">=</button>
                 </div>
             </div>
+            
 
-
-
-     
+        </div>
+        <label for="skins">Choose a skin:</label>
+            <select name="skins" id="skins">
+            <option value="helloKitty">Hello Kitty</option>
+            <option value="SW">SW</option>
+            <option value="shrek">Shrek</option>
+            </select>
     </div>
     
 
