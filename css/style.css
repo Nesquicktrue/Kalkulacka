@@ -95,3 +95,8 @@ button:hover,#tlacRovna:hover {
     height: 50px;
     font-weight: 900;
 }
+
+H6,label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}

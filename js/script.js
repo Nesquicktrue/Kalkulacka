@@ -151,7 +151,6 @@ function overZadani (znamenko) {
                 operator = displayNahore.textContent[delka];
                 pocitej();
                 zpracujDalsiCislo();
-                console.log(operator);
             }
             break;
        
@@ -191,7 +190,7 @@ function deleniNulou() {
                 boomGif.classList.toggle("neviditelny");
             }, 900); 
             boomGif.classList.toggle("neviditelny");
-        displayDole.textContent = "   ÷ 0   ";
+        displayDole.textContent = " ÷ 0";
     }
 };
 
