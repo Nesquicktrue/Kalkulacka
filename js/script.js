@@ -192,11 +192,6 @@ skin.addEventListener("change", () => {
             document.querySelector(".display").style.backgroundColor = "lightcyan";
             document.querySelector(".telo").style.backgroundImage="url(./img/sw.jpg)";   
             break;
-        case "shrek":
-            document.querySelector(".display").style.backgroundColor = "greenyellow";
-            document.querySelector(".telo").style.backgroundImage="url(./img/shrek.jpg)";  
-            break;
-            
     }    
 
 });
