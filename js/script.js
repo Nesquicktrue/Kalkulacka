@@ -27,7 +27,13 @@ let novyOperator;   // zde ukládám další operátor pro počítání
 let delka;          // pozice pro znak znaménka ve stringu displayNahore.textcontent 
 
 // eventy pro tlačítka čísel
-tlacClear.addEventListener("click", () => {location.reload()});
+tlacClear.addEventListener("click", () => {
+    displayNahore.textContent = "";
+    displayDole.textContent = "";
+    prvniHodnota = 0;
+    druhaHodnota = 0;
+});
+
 tlac1.addEventListener("click", () => {displayDole.textContent += tlac1.value});
 tlac2.addEventListener("click", () => {displayDole.textContent += tlac2.value});
 tlac3.addEventListener("click", () => {displayDole.textContent += tlac3.value});
