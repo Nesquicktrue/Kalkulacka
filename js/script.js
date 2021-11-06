@@ -25,6 +25,7 @@ let operator;       // zde ukládám operator matematické funkce
 let novyOperator;   // zde ukládám další operátor pro počítání
                     // v řadě bez stisknutí "Rovná se"
 let delka;          // pozice pro znak znaménka ve stringu displayNahore.textcontent 
+let hotovo = false;         // zde ukládám stav po rovná se
 
 // eventy pro tlačítka čísel
 tlacClear.addEventListener("click", () => {
@@ -34,16 +35,26 @@ tlacClear.addEventListener("click", () => {
     druhaHodnota = 0;
 });
 
-tlac1.addEventListener("click", () => {displayDole.textContent += tlac1.value});
-tlac2.addEventListener("click", () => {displayDole.textContent += tlac2.value});
-tlac3.addEventListener("click", () => {displayDole.textContent += tlac3.value});
-tlac4.addEventListener("click", () => {displayDole.textContent += tlac4.value});
-tlac5.addEventListener("click", () => {displayDole.textContent += tlac5.value});
-tlac6.addEventListener("click", () => {displayDole.textContent += tlac6.value});
-tlac7.addEventListener("click", () => {displayDole.textContent += tlac7.value});
-tlac8.addEventListener("click", () => {displayDole.textContent += tlac8.value});
-tlac9.addEventListener("click", () => {displayDole.textContent += tlac9.value});
-tlac0.addEventListener("click", () => {displayDole.textContent += tlac0.value});
+tlac1.addEventListener("click", () => pridejCislovku(tlac1));
+tlac2.addEventListener("click", () => pridejCislovku(tlac2));
+tlac3.addEventListener("click", () => pridejCislovku(tlac3));
+tlac4.addEventListener("click", () => pridejCislovku(tlac4));
+tlac5.addEventListener("click", () => pridejCislovku(tlac5));
+tlac6.addEventListener("click", () => pridejCislovku(tlac6));
+tlac7.addEventListener("click", () => pridejCislovku(tlac7));
+tlac8.addEventListener("click", () => pridejCislovku(tlac8));
+tlac9.addEventListener("click", () => pridejCislovku(tlac9));
+tlac0.addEventListener("click", () => pridejCislovku(tlac0));
+
+function pridejCislovku (c) {
+    if (hotovo) {
+        displayDole.textContent = c.value;
+        displayNahore.textContent = "";
+        hotovo = false;
+    } else {
+        displayDole.textContent += c.value;
+    }
+}
 
 // tlačítko smazat poslední znak
 // hlídám jestli není dole prázdno a nenechám mazat z výsledku
@@ -76,6 +87,7 @@ tlacRovna.addEventListener("click", () => {
         || displayNahore.textContent[delka] === "*" 
         || displayNahore.textContent[delka] === "/"))  {
             pocitej();
+            hotovo = true;
         } 
 });
 
