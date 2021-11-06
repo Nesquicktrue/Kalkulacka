@@ -149,9 +149,6 @@ function overZadani (znamenko) {
 function pocitej () {
     displayNahore.textContent += displayDole.textContent + " = ";
     druhaHodnota = parseFloat(displayDole.textContent);
-    console.log(prvniHodnota + " : " + typeof(prvniHodnota));
-    console.log(operator + " : znaménko");
-    console.log(druhaHodnota + " : " + typeof(druhaHodnota));
     switch (operator) {
         case "+":
             displayDole.textContent = prvniHodnota + druhaHodnota;    
