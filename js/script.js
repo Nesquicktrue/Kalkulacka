@@ -74,8 +74,9 @@ tlacSmaz.addEventListener("click", () => {
 tlacTecka.addEventListener("click", () => {
     if (displayDole.textContent.includes(".")) {
     } else {
-        displayDole.textContent += "."}
-    });
+        pridejCislovku(tlacTecka);
+    }
+});
 
 // u tlačítka "rovná se" hlídám vícero zmáčknutí 
 tlacRovna.addEventListener("click", () => {
