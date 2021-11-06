@@ -110,6 +110,7 @@ function zjistiHorniZnamenko () {
 }
 
 function overZadani (znamenko) {
+    hotovo = false;
     let stavOperace;
     zjistiHorniZnamenko();
     operator = znamenko;
