@@ -26,10 +26,6 @@ let novyOperator;   // zde ukládám další operátor pro počítání
 let delka;          // pozice pro znak znaménka ve stringu displayNahore.textcontent 
 
 // eventy pro tlačítka čísel
-
-
-
-
 tlacClear.addEventListener("click", () => {location.reload()});
 tlac1.addEventListener("click", () => {displayDole.textContent += tlac1.value});
 tlac2.addEventListener("click", () => {displayDole.textContent += tlac2.value});
@@ -45,16 +41,15 @@ tlac0.addEventListener("click", () => {displayDole.textContent += tlac0.value});
 // tlačítko smazat poslední znak
 // hlídám jestli není dole prázdno a nenechám mazat z výsledku
 tlacSmaz.addEventListener("click", () => {
-    delka = displayNahore.textContent.length - 2;
-    if (displayDole.textContent != "" ||
-           displayNahore.textContent[delka] === "+"
+    zjistiHorniZnamenko();
+    if (displayNahore.textContent === ""
+        || displayNahore.textContent[delka] === "+"
         || displayNahore.textContent[delka] === "-" 
         || displayNahore.textContent[delka] === "*" 
-        || displayNahore.textContent[delka] === "/")    
-    {
-    displayDole.textContent = 
-        displayDole.textContent.slice(0, -1);
+        || displayNahore.textContent[delka] === "/") {
+            displayDole.textContent = displayDole.textContent.slice(0, -1);
     }
+    
 });
 
 // tlačítko tečka - hlídám pouze jedno použití v jednom čísle
@@ -66,7 +61,7 @@ tlacTecka.addEventListener("click", () => {
 
 // u tlačítka "rovná se" hlídám vícero zmáčknutí 
 tlacRovna.addEventListener("click", () => {
-    delka = displayNahore.textContent.length - 2;
+    zjistiHorniZnamenko();
      if (  
         displayDole.textContent != "" && (
         displayNahore.textContent[delka] === "+"
@@ -91,34 +86,31 @@ tlacMinus.addEventListener("click", () => {
 });
 
 // funkce pro zpracování
+function zjistiHorniZnamenko () {
+    return delka = displayNahore.textContent.length - 2;
+}
+
 function overZadani (znamenko) {
     let stavOperace;
-    delka = displayNahore.textContent.length - 2;
+    zjistiHorniZnamenko();
     operator = znamenko;
     novyOperator = operator;    //ukládám hodnotu než se přepíše,
                                 // abych ji použil na horní zápis
                                 // v případě jiného znaménka v řadě výpočtů
     
     if (displayNahore.textContent == "") {
-        console.log("zpracovávám první číslo")
         zpracujPrvniCislo(displayDole.textContent);
-
     } else if (displayNahore.textContent[delka] === znamenko) {
              stavOperace = "stejneZnamenko";
-             console.log("stejné znaménko");
-             
     } else if ( displayNahore.textContent[delka] === "+" ||
                 displayNahore.textContent[delka] === "-" ||
                 displayNahore.textContent[delka] === "*" ||
                 displayNahore.textContent[delka] === "/"      
             ) {
             stavOperace = "jineZnamenko";
-            console.log("jiné znaménko");
-
     } else {
             stavOperace = "nahoreJeVyraz";
     };      
-    
     switch (stavOperace) {
         case "stejneZnamenko": 
             if (displayDole.textContent != "") {
@@ -133,9 +125,7 @@ function overZadani (znamenko) {
                 displayNahore.textContent = 
                     displayNahore.textContent.substr(displayNahore.textContent[delka], 2) + 
                     " " + operator + " ";
-                console.log ("Měním znaménko na: " + operator);
             } else {
-
                 operator = displayNahore.textContent[delka];
                 pocitej();
                 zpracujDalsiCislo();
@@ -150,7 +140,7 @@ function overZadani (znamenko) {
 }; 
 
 function pocitej () {
-    displayNahore.textContent += displayDole.textContent;
+    displayNahore.textContent += displayDole.textContent + " = ";
     druhaHodnota = parseFloat(displayDole.textContent);
     console.log(prvniHodnota + " : " + typeof(prvniHodnota));
     console.log(operator + " : znaménko");
@@ -174,7 +164,6 @@ function pocitej () {
             boomGif.classList.toggle("neviditelny");
         }, 900); 
         boomGif.classList.toggle("neviditelny");
-        
     }
     prvniHodnota = parseFloat(displayDole.textContent);
 };
