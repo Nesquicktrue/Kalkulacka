@@ -46,6 +46,7 @@ tlac8.addEventListener("click", () => pridejCislovku(tlac8));
 tlac9.addEventListener("click", () => pridejCislovku(tlac9));
 tlac0.addEventListener("click", () => pridejCislovku(tlac0));
 
+// rozlišuji nové zadání po stisknutí "Rovná se" od rozšiřování stávajícího čísla
 function pridejCislovku (c) {
     if (hotovo) {
         displayDole.textContent = c.value;
@@ -54,7 +55,7 @@ function pridejCislovku (c) {
     } else {
         displayDole.textContent += c.value;
     }
-}
+};
 
 // tlačítko smazat poslední znak
 // hlídám jestli není dole prázdno a nenechám mazat z výsledku
@@ -108,7 +109,7 @@ tlacMinus.addEventListener("click", () => {
 // funkce pro zpracování
 function zjistiHorniZnamenko () {
     return delka = displayNahore.textContent.length - 2;
-}
+};
 
 function overZadani (znamenko) {
     hotovo = false;
@@ -177,26 +178,31 @@ function pocitej () {
             displayDole.textContent = prvniHodnota / druhaHodnota;
             break;          
     }
-    if (displayDole.textContent === "Infinity") {      // dělení nulou
+    deleniNulou();
+    prvniHodnota = parseFloat(displayDole.textContent);
+};
+
+function deleniNulou() {
+    if (displayDole.textContent === "Infinity" || displayDole.textContent === "NaN") {
         setTimeout(function(){
             boomGif.classList.toggle("neviditelny");
         }, 900); 
         boomGif.classList.toggle("neviditelny");
+        displayDole.textContent = "Dělíte nulou!";
     }
-    prvniHodnota = parseFloat(displayDole.textContent);
 };
 
 function zpracujPrvniCislo (vyraz1) {    
     displayNahore.textContent = vyraz1 + " " + operator + " ";
     displayDole.textContent = "";
     prvniHodnota = parseFloat(vyraz1);
-}
+};
 
 function zpracujDalsiCislo () {
     operator = novyOperator;  // beru si nově zmáčknuté znaménko pro horní zápis
     displayNahore.textContent = displayDole.textContent + " " + operator + " ";
     displayDole.textContent = "";      
-}
+};
 
 //změna skinu
 skin.addEventListener("change", () => {
