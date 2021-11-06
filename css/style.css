@@ -8,6 +8,14 @@
     display: none;
 }
 
+.wrapper {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .telo {
     position: relative;
     background-image: url("../img/hello-kitty.jpg");
@@ -15,7 +23,6 @@
     min-height: 400px;
     border-radius: 15px;
     border: 3px solid black;
-
 }
 
 .cover {
@@ -28,15 +35,6 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-}
-
-.wrapper {
-    width: 100%;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .display {
@@ -61,13 +59,9 @@
 
 .funkce {
     width: 120px;
-     display: flex;
-     flex-direction: column;
+    display: flex;
+    flex-direction: column;
      
-}
-
-#tlacRovna {
-    background-color: lightgreen;
 }
 
 .funkce button {
@@ -75,10 +69,13 @@
     font-weight: 900;
     height: 50px;
 }
+    
+#tlacRovna {
+    background-color: lightgreen;
+}
 
 .num {
     width: 200px;
-    
 }
 
 button {
